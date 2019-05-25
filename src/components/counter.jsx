@@ -29,9 +29,13 @@ class Counter extends Component {
 
   //Any data that this components needs
   state = {
-    count: this.props.value,
+    count: 1,
     imgUrl: "https://picsum.photos/200",
-    tags: ["tag1", "tag2"]
+    tags: [
+      { id: "key1", value: "tagvalue" },
+      { id: "key2", value: 2 },
+      { id: "key", value: 100 }
+    ]
   };
 
   render() {
@@ -46,8 +50,10 @@ class Counter extends Component {
       <div>
         {/* <img src={this.state.imgUrl} alt="" /> */}
         {/* //class name is bootstrap components */}
+        {this.props.children}
+        <h4>{this.props.id}</h4>
         <span styles={this.styles} className={classes}>
-          {this.formatCount()}
+          {this.formatCount(this.props.value)}
         </span>
         {/* <h1>{this.state.count}</h1> */}(
         <button onClick={this.onClickhandle} className="b2 b2-secondary btn-sm">
@@ -59,11 +65,6 @@ class Counter extends Component {
         >
           Argument passiing test
         </button>
-        <ul>
-          {this.state.tags.map(tag => (
-            <li key={tag.id}>{tag}</li>
-          ))}
-        </ul>
       </div>
 
       //here if you don't want a div inside this
@@ -73,10 +74,9 @@ class Counter extends Component {
       //   </ReactFragment>
     );
   }
-  formatCount() {
-    const { count } = this.state;
+  formatCount = count => {
     return count === 0 ? <h2>zero</h2> : count;
-  }
+  };
 }
 
 export default Counter;
